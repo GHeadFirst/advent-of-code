@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -14,6 +13,21 @@ func absInt(num int) int {
 		return -num
 	}
 	return num
+}
+
+func howOften(num int, slice []int, arrayToAdd []int) {
+	var counter int
+	var numberInArray int
+	for i := 0; i < len(slice); i++ {
+		fmt.Println(slice[i])
+		if num == slice[i] {
+			counter++
+		}
+	}
+	numberInArray *= counter
+	// fmt.Println(numberInArray)
+
+	arrayToAdd = append(arrayToAdd, (numberInArray))
 }
 
 func main() {
@@ -35,7 +49,7 @@ func main() {
 		// fmt.Printf("First list:%s Second List:%s\n", items[0], items[1])
 	}
 
-	// fmt.Println(reflect.TypeOf(slice))
+	arrayToAdd := []int{}
 
 	slice3 := []int{}
 	slice4 := []int{}
@@ -52,11 +66,39 @@ func main() {
 		slice3 = append(slice3, num)
 		slice4 = append(slice4, num2)
 
-		fmt.Println(slice3[i] + slice4[i])
+		// fmt.Println(slice3[i] + slice4[i])
 	}
 
-	sort.Ints(slice3)
-	sort.Ints(slice4)
+	var mulitpler int
+	var myNum int
+
+	for i := 0; i < len(slice3); i++ {
+		mulitpler = 0
+		for j := 0; j < len(slice4); j++ {
+			if slice3[i] == slice4[j] {
+				mulitpler++
+			}
+		}
+		myNum = mulitpler * slice3[i]
+		arrayToAdd = append(arrayToAdd, (myNum))
+		if mulitpler >= 1 {
+			fmt.Print(mulitpler)
+			fmt.Println(" Multipler here")
+		}
+		// fmt.Println(arrayToAdd[i])
+	}
+
+	var mySolution int
+	for i := 0; i < len(arrayToAdd)-1; i++ {
+		mySolution += arrayToAdd[i]
+	}
+
+	fmt.Println(mySolution)
+
+	/*  Solution to Part a
+		// fmt.Println(reflect.TypeOf(slice))
+		sort.Ints(slice3)
+		sort.Ints(slice4)
 
 	slice5 := []int{}
 	var mynum int
@@ -68,5 +110,5 @@ func main() {
 		mynum = mynum + slice5[i]
 	}
 	fmt.Println(mynum)
-
+	*/
 }
